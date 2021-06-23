@@ -9,6 +9,6 @@ Using OpenWeather API to pull weather data for a user-specified location.
 
 ### Dependencies
 - `requests` via https://pypi.org/project/requests
-- if you don't have it -> `pip install requests`
+  - if you don't have it -> `pip install requests`
 - an API key from https://openweathermap.org/
-- it should be free
+  - it should be free
