@@ -22,6 +22,11 @@ def get_loc():
 '''
 The OpenWeather API has a bigass JSON file with all the cities.
 Search that bitch to esnure the user has put in a valid loc
+This assumes that there is only a single instance of a city in a given state...
+...which I hope is true...idk...
+
+(maybe prompt user to verify zip code)
+
 @inputs: {city}{state}
 @returns: {city_id} and a message on success
 '''
