@@ -3,12 +3,16 @@
 import json
 import requests
 
+def print_ver_info():
+    print("====================================================")
+    print("          Welcome to OpenWindow v1.0")	
+    print("====================================================")
+
 def apisetup(city_id):
-    key = '00000000000000000000000000000000' #placeholder
-    print("API SETUP NOW")
+    key = '0000000000000000000000000000' # placeholder
+    print("> SETTING UP API REQUEST...")
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     complete_url = base_url + "id=" + city_id + "&appid=" + key + "&units=imperial"
-    print(complete_url)
     return(complete_url)
 
 def get_loc():
@@ -25,8 +29,6 @@ Search that bitch to esnure the user has put in a valid loc
 This assumes that there is only a single instance of a city in a given state...
 ...which I hope is true...idk...
 
-(maybe prompt user to verify zip code)
-
 @inputs: {city}{state}
 @returns: {city_id} and a message on success
 '''
@@ -35,10 +37,11 @@ def loc_ver(city, state):
     city_data = json.load(f)
     for entry in city_data:
         if city == entry['name'] and state == entry['state']:
-            print('CITY IDENTIFIED')
+            print('> CITY IDENTIFIED...')
             return entry['id']
 
     f.close()
+
 '''
 Call the OpenWeather API using the city_id
 @input: weather ID
@@ -46,9 +49,15 @@ Call the OpenWeather API using the city_id
 '''
 def get_weather(city_id):
     req = apisetup(city_id)
+    print("> SENDING REQUEST...")
+    ret = requests.get(req).json()
+    print("> RESPONSE RECIEVED...")
+    print("***************************")
+    print("CURRENT TEMP: " + str(ret['main']['feels_like']) + " F")
+    print("***************************")
 
 def main():
-    print("Welcome to OpenWindow v0.0-BETA")
+    print_ver_info()
     loc_id = get_loc()
     get_weather(loc_id)
 
