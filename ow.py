@@ -9,11 +9,22 @@ def print_ver_info():
     print("====================================================")
 
 def apisetup(city_id):
-    key = '0000000000000000000000000000' # placeholder
+    key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' # Remove when pushing to public GH repo
     print("> SETTING UP API REQUEST...")
     base_url = "http://api.openweathermap.org/data/2.5/weather?"
     complete_url = base_url + "id=" + city_id + "&appid=" + key + "&units=imperial"
     return(complete_url)
+
+def prog_loop():
+    # This function will monitor for user exit
+    cont = 1
+    while cont:
+        loc_id = get_loc()
+        get_weather(loc_id)
+        again = input("Would you like to try again? (Y/N) ")
+        if again == "N" or again == "n":
+            cont = 0
+            print("Exiting...")
 
 def get_loc():
     # Prompt user for loc
@@ -58,8 +69,7 @@ def get_weather(city_id):
 
 def main():
     print_ver_info()
-    loc_id = get_loc()
-    get_weather(loc_id)
+    prog_loop()
 
 if __name__ == "__main__":
     main()
